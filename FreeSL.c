@@ -1,16 +1,5 @@
-#define _CRT_SECURE_NO_WARNINGS
-#include <stdlib.h>
-void errmsg(const char* msg, int ch, int line)
-{
-	printf("ERROR: %s\nLine: %i\nCharacter: %i", msg, ch, line);
-	abort();
-}
-#define FREESL_ERR(msg, ch, line) errmsg(msg, ch, line);
 
 #include "FreeSL.h"
-
-#include <stdio.h>
-
 
 #define min(x, y) ((x) < (y) ? (x) : (y))
 #define max(x, y) ((x) > (y) ? (x) : (y))
@@ -1012,21 +1001,4 @@ FreeSL_AST FreeSL_GenAST(char* code)
 	}
 
 	return tokenizer.ast;
-}
-
-int main()
-{
-	FILE* file = fopen("C:/Users/Andrei/Documents/Example.glsl", "r");
-
-	fseek(file, 0, SEEK_END);
-	int size = ftell(file);
-	fseek(file, 0, SEEK_SET);
-
-	char* fcontent = malloc(size + 1);
-	fread(fcontent, 1, size, file);
-	fcontent[size] = 0;
-
-	FreeSL_AST ast = FreeSL_GenAST(fcontent);
-
-	printf("Hello!");
 }
